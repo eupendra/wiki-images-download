@@ -5,9 +5,10 @@
 
 
 # useful for handling different item types with a single interface
-from itemadapter import ItemAdapter
+from scrapy.pipelines.images import ImagesPipeline
 
+class CustomWikiImagesPipeline(ImagesPipeline):
+    def file_path(self, request, response=None, info=None, *, item=None):
+        return request.url.split('/')[-1]
 
-class WikiImagesPipeline:
-    def process_item(self, item, spider):
-        return item
+    
